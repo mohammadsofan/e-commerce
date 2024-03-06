@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
