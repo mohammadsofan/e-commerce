@@ -127,9 +127,7 @@ export default function Navbar({ setIsLogged, isLogged }) {
               </li>
             </ul>
 
-            <div
-              className={`${style.buttons} d-flex gap-2 ms-lg-auto mt-3 mt-lg-0`}
-            >
+            <div className={`d-flex gap-2 ms-lg-auto mt-3 mt-lg-0`}>
               {!isLogged ? (
                 <>
                   <NavLink className="btn btn-success" to="/signup">
