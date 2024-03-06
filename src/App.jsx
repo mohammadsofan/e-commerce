@@ -33,6 +33,10 @@ export default function App() {
           element: <Products />,
         },
         {
+          path: "/about/dodo",
+          element: <NotFound />,
+        },
+        {
           path: "*",
           element: <NotFound />,
         },
