@@ -1,0 +1,46 @@
+.loginContainer {
+  min-height: 100vh;
+}
+
+.loginForm {
+  position: relative;
+  background-color: #fff;
+  width: 350px;
+  box-shadow: 0px 0px 3px #198754;
+  border-radius: 10px;
+  padding: 40px 30px;
+  overflow: hidden;
+}
+
+.loginForm::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 0;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid green;
+}
+
+.loginInput {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #a8a8a8;
+}
+
+.loginInput:focus {
+  border-bottom: 2px solid #198754;
+}
+
+@media (max-width: 570px) {
+  .loginForm {
+    width: 300px;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+@media (max-height: 570px) {
+  .loginForm {
+    margin: 73px 0;
+  }
+}

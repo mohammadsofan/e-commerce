@@ -1,0 +1,32 @@
+.swiperButtons {
+  color: #198754;
+  background: #8080805e;
+  padding: 4px;
+  box-sizing: content-box;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.cursorpointer {
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .swiperButtons {
+    width: 35px;
+    height: 35px;
+  }
+  .swiperButtons::after {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 400px) {
+  .swiperButtons {
+    width: 30px;
+    height: 30px;
+  }
+  .swiperButtons::after {
+    font-size: 1.2rem;
+  }
+}

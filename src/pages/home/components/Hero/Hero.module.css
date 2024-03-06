@@ -1,0 +1,61 @@
+.carousel {
+  position: relative;
+}
+
+.carouselImg {
+  height: 100vh;
+}
+.carouselText {
+  position: absolute;
+  left: 5rem;
+  top: 15rem;
+  color: #fff;
+}
+.carouselText h1 {
+  text-transform: capitalize;
+  font-size: 3.5rem;
+  max-width: 600px;
+}
+
+.carouselText p {
+  text-transform: capitalize;
+  font-size: 1.4rem;
+}
+.carouselText p span {
+  color: #ff9500;
+}
+@media (max-width: 767px) {
+  .carouselImg {
+    object-fit: cover;
+    height: 450px;
+  }
+  .carouselText {
+    left: 1rem;
+    top: 12rem;
+    max-width: 400px;
+  }
+  .carouselText h1 {
+    font-size: 2.5rem;
+  }
+  .carouselText p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 565px) {
+  .carouselImg {
+    height: 350px;
+    object-fit: unset;
+  }
+  .carouselText {
+    left: 1rem;
+    top: 8rem;
+    max-width: 240px;
+  }
+  .carouselText h1 {
+    font-size: 1.5rem;
+  }
+  .carouselText p {
+    font-size: 1rem;
+  }
+}
