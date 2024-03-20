@@ -7,14 +7,16 @@ import NotFound from "./pages/notfound/NotFound";
 import Products from "./pages/products/Products";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/home/Home";
-
+import UserContextProvider from "./context/User";
+import Product from "./pages/product/Product";
+import SendCode from "./pages/sendcode/SendCode";
+import ResetPassword from "./pages/resetpassword/ResetPassword";
+import Cart from "./pages/cart/Cart";
 export default function App() {
-  const [isLogged, setIsLogged] = useState(false);
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Root setIsLogged={setIsLogged} isLogged={isLogged} />,
+      element: <Root />,
       children: [
         {
           path: "/",
@@ -26,15 +28,27 @@ export default function App() {
         },
         {
           path: "/login",
-          element: <Login setIsLogged={setIsLogged} />,
+          element: <Login />,
         },
         {
           path: "/products/categories/:categoryName/:categoryId",
           element: <Products />,
         },
         {
-          path: "/about/dodo",
-          element: <NotFound />,
+          path: "/product/:id",
+          element: <Product />,
+        },
+        {
+          path: "/sendCode",
+          element: <SendCode />,
+        },
+        {
+          path: "/resetPassword",
+          element: <ResetPassword />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
         },
         {
           path: "*",
@@ -45,7 +59,10 @@ export default function App() {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <UserContextProvider>
+        <RouterProvider router={router} />
+      </UserContextProvider>
+
       <ToastContainer />
     </>
   );

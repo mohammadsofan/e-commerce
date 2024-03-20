@@ -8,3 +8,11 @@ body {
   color: #023b12;
   border-bottom: 2px solid #198754;
 }
+.remove-border {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

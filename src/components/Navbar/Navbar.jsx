@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
-
-export default function Navbar({ setIsLogged, isLogged }) {
+import { UserContext } from "../../context/User";
+export default function Navbar() {
+  const { userName, setUserToken, setUserName } = useContext(UserContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
     toast.success("You are now logged out!", {
@@ -16,7 +19,9 @@ export default function Navbar({ setIsLogged, isLogged }) {
       theme: "dark",
       transition: Bounce,
     });
-    setIsLogged(false);
+    setUserToken(null);
+    setUserName(null);
+    navigate("/");
   };
 
   return (
@@ -120,6 +125,13 @@ export default function Navbar({ setIsLogged, isLogged }) {
                   Products
                 </NavLink>
               </li>
+              {userName && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/cart">
+                    Cart
+                  </NavLink>
+                </li>
+              )}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/about">
                   About
@@ -128,7 +140,7 @@ export default function Navbar({ setIsLogged, isLogged }) {
             </ul>
 
             <div className={`d-flex gap-2 ms-lg-auto mt-3 mt-lg-0`}>
-              {!isLogged ? (
+              {userName == null ? (
                 <>
                   <NavLink className="btn btn-success" to="/signup">
                     Sign up
@@ -138,13 +150,35 @@ export default function Navbar({ setIsLogged, isLogged }) {
                   </NavLink>
                 </>
               ) : (
-                <NavLink
-                  className="btn btn-outline-success"
-                  to="/"
-                  onClick={handleLogout}
-                >
-                  Log out
-                </NavLink>
+                <>
+                  <span>{userName}</span>
+                  <div
+                    className="options-menu position-relative cursor-pointer"
+                    onClick={() => setMenuOpen((prev) => !prev)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      width={"12px"}
+                    >
+                      <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                    </svg>
+
+                    <div
+                      className={`${
+                        menuOpen ? "d-flex" : "d-none"
+                      } flex-column position-absolute bg-white border rounded p-1`}
+                    >
+                      <button className="remove-border p-1">Profile</button>
+                      <button
+                        className="remove-border p-1"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </>
               )}
             </div>
           </div>

@@ -39,7 +39,7 @@ export default function () {
   async function getCategories() {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/categories/active?page=1&limit=10`
+        `${import.meta.env.VITE_API_URL}/categories/active?limit=100`
       );
 
       setData(response.data.categories);
@@ -55,7 +55,6 @@ export default function () {
   }, []);
 
   const handleOnClick = (category) => {
-    console.log(category.name);
     navigate(`/products/categories/${category.name}/${category.id}`);
   };
   return (

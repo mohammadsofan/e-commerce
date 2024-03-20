@@ -87,7 +87,7 @@ export default function SignUp() {
         onSubmit={handelSubmit}
       >
         <div className="text-center">
-          <h1 className="mb-4">Sign Up</h1>
+          <span className="mb-4 fs-1">Sign Up</span>
         </div>
         <div>
           <input

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Login.module.css";
 import { validateForm } from "./loginValidation";
 import Loader from "../../components/Loader/Loader";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-export default function Login({ setIsLogged }) {
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/User";
+export default function Login() {
+  const { setUserToken } = useContext(UserContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -15,6 +17,7 @@ export default function Login({ setIsLogged }) {
   const [validate, setValidate] = useState({ name: "ok", message: "ok" });
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
+  const [codeModal, setCodeModal] = useState(false);
   const handelSubmit = async (e) => {
     e.preventDefault();
     const validation = validateForm(user);
@@ -27,6 +30,7 @@ export default function Login({ setIsLogged }) {
           `${import.meta.env.VITE_API_URL}/auth/signin`,
           user
         );
+
         setError("");
         toast.success("Welcome!", {
           position: "top-right",
@@ -40,7 +44,7 @@ export default function Login({ setIsLogged }) {
           transition: Bounce,
         });
         localStorage.setItem("token", response.data.token);
-        setIsLogged(true);
+        setUserToken(response.data.token);
         navigate("/");
       } catch (error) {
         setError(error.response.data.message);
@@ -77,7 +81,7 @@ export default function Login({ setIsLogged }) {
         onSubmit={handelSubmit}
       >
         <div className="text-center">
-          <h1>Login</h1>
+          <span className="fs-1">Login</span>
         </div>
 
         <div>
@@ -109,6 +113,9 @@ export default function Login({ setIsLogged }) {
 
         {loader && <Loader size={30} />}
         {error && <span className="text-danger">{error}</span>}
+        <Link className="text-primary text-decoration-none" to="/sendCode">
+          Forgot Password ?
+        </Link>
         <button
           type="submit"
           disabled={loader ? "disabled" : null}

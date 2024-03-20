@@ -1,0 +1,40 @@
+.spaceTop {
+  margin-top: 100px;
+}
+.mainImage {
+  text-align: center;
+  box-shadow: 0px 0px 4px 1px rgb(184, 183, 183);
+  border-radius: 5px;
+  height: 400px;
+}
+@media (max-width: 767px) {
+  .mainImage {
+    height: 300px;
+  }
+}
+.mainImage img {
+  height: 100%;
+}
+.subImages {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.subImages .subImageContainer {
+  overflow: hidden;
+}
+.subImages .subImageContainer {
+  width: calc((100%) / 5);
+  box-shadow: 0px 0px 4px 1px rgb(184, 183, 183);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.subImages .subImageContainer img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  transition: 0.3s transform;
+}
+.subImages .subImageContainer img:hover {
+  transform: scale(1.1);
+}
