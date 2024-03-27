@@ -16,3 +16,11 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
+.bg-light-gray {
+  background-color: rgba(214, 214, 214, 0.363);
+}
+@media (max-width: 550px) {
+  .textSmall {
+    font-size: 14px;
+  }
+}

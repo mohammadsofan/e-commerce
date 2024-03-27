@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import { UserContext } from "../../context/User";
 export default function Navbar() {
@@ -169,9 +169,14 @@ export default function Navbar() {
                         menuOpen ? "d-flex" : "d-none"
                       } flex-column position-absolute bg-white border rounded p-1`}
                     >
-                      <button className="remove-border p-1">Profile</button>
+                      <Link
+                        className="text-decoration-none text-black p-1"
+                        to="/profile"
+                      >
+                        Profile
+                      </Link>
                       <button
-                        className="remove-border p-1"
+                        className="remove-border text-black p-1"
                         onClick={handleLogout}
                       >
                         Logout

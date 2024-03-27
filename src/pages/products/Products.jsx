@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import style from "./Products.module.css";
 import Loader from "../../components/Loader/Loader";
+import Stars from "./components/Stars/Stars";
 export default function Products() {
   const navigate = useNavigate();
   const { categoryName, categoryId } = useParams();
@@ -80,6 +81,7 @@ export default function Products() {
                           ? product.description.slice(0, 60) + "..."
                           : product.description}
                       </p> */}
+                    <Stars num={parseInt(product.avgRating)} />
                     <div className="d-flex w-100 justify-content-between align-items-end">
                       <button
                         className="btn btn-success rounded"
@@ -97,15 +99,16 @@ export default function Products() {
                           />
                         </svg>
                       </button>
+
                       {product.discount ? (
                         <div className="d-flex gap-2">
-                          <span className="fs-5 text-decoration-line-through text-danger">
+                          <span className="fs-6 text-decoration-line-through text-danger">
                             ${product.price}
                           </span>
-                          <span className="fs-5">${product.finalPrice}</span>
+                          <span className="fs-6">${product.finalPrice}</span>
                         </div>
                       ) : (
-                        <span className="fs-5">${product.price}</span>
+                        <span className="fs-6">${product.price}</span>
                       )}
                     </div>
                   </div>

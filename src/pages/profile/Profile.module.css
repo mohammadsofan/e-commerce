@@ -1,0 +1,16 @@
+.profile {
+  box-shadow: 0px 0px 2px rgb(137, 137, 137);
+  border-radius: 10px;
+}
+.imageContainer {
+  width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgb(216, 243, 216);
+  outline: 3px solid rgb(162, 238, 162);
+}
+
+.imageContainer img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}

@@ -1,5 +1,6 @@
 .signUpContainer {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
+  margin-top: 50px;
 }
 
 .signUpForm {
@@ -38,7 +39,7 @@
     padding: 0;
   }
 }
-@media (max-height: 570px) {
+@media (max-height: 600px) {
   .signUpForm {
     margin: 73px 0;
   }

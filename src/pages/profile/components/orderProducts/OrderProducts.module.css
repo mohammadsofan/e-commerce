@@ -1,0 +1,11 @@
+.productImg {
+  width: 80px;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .productImg {
+    width: 50px;
+  }
+}

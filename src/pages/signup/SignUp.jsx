@@ -11,6 +11,8 @@ export default function SignUp() {
     userName: "",
     email: "",
     password: "",
+    phone: "",
+    address: "",
     gender: "Male",
     image: "",
   });
@@ -28,6 +30,8 @@ export default function SignUp() {
       formData.append("userName", user.userName);
       formData.append("email", user.email);
       formData.append("password", user.password);
+      formData.append("phone", user.phone);
+      formData.append("address", user.address);
       formData.append("gender", user.gender);
       formData.append("image", user.image);
       try {
@@ -83,7 +87,7 @@ export default function SignUp() {
       className={`d-flex justify-content-center align-items-center w-100  ${style.signUpContainer}`}
     >
       <form
-        className={`d-flex flex-column gap-3 ${style.signUpForm}`}
+        className={`d-flex flex-column gap-2 ${style.signUpForm}`}
         onSubmit={handelSubmit}
       >
         <div className="text-center">
@@ -128,7 +132,26 @@ export default function SignUp() {
             {validate.name == "password" ? validate.message : ""}
           </span>
         </div>
-
+        <div>
+          <input
+            type="text"
+            name="phone"
+            placeholder="phone Number (Optional)"
+            value={user.phone}
+            onChange={handleChange}
+            className={`p-2 w-100 ${style.signUpInput}`}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="address"
+            placeholder="address (Optional)"
+            value={user.address}
+            onChange={handleChange}
+            className={`p-2 w-100 ${style.signUpInput}`}
+          />
+        </div>
         <div className="gender">
           <div>Gender</div>
           <div className="d-flex gap-4">

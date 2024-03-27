@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import { Bounce, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState([]);
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
   const [rerender, setRerender] = useState(0);
@@ -21,7 +22,9 @@ export default function Cart() {
       }
       setError("");
     } catch (error) {
-      setError(error.response.data.message);
+      //server will return an error with status 500 if there is no products in the cart, thats why i did not set the error,
+      //it will show the user an empty cart message insted of the server error.
+      if (error.response.status != 500) setError(error.response.data.message);
     } finally {
       setLoader(false);
     }
@@ -97,7 +100,6 @@ export default function Cart() {
         transition: Bounce,
       });
     } catch (error) {
-      console.log(error);
       if (error.code == "ERR_NETWORK") setError(error.message);
       toast.error("clear cart failed!", {
         position: "top-right",
@@ -283,45 +285,17 @@ export default function Cart() {
                       <hr className="my-4" />
                       <div className="d-flex justify-content-between mb-4">
                         <h5 className="text-uppercase">items {cart.length}</h5>
-                        <h5>{`$${totalPrice}`}</h5>
                       </div>
-                      <h5 className="text-uppercase mb-3">Shipping</h5>
-                      <div className="mb-4 pb-2">
-                        <select className="select">
-                          <option value={1}>Standard-Delivery- €5.00</option>
-                          <option value={2}>Two</option>
-                          <option value={3}>Three</option>
-                          <option value={4}>Four</option>
-                        </select>
-                      </div>
-                      <h5 className="text-uppercase mb-3">Give code</h5>
                       <div className="mb-5">
-                        <div className="form-outline">
-                          <input
-                            type="text"
-                            id="form3Examplea2"
-                            className="form-control form-control-lg"
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Examplea2"
-                          >
-                            Enter your code
-                          </label>
+                        <hr className="my-4" />
+                        <div className="d-flex justify-content-between mb-5">
+                          <h5 className="text-uppercase">Total price</h5>
+                          <h5>{`$${totalPrice}`}</h5>
                         </div>
+                        <Link className="btn btn-success" to={"/order"}>
+                          GO TO ORDER
+                        </Link>
                       </div>
-                      <hr className="my-4" />
-                      <div className="d-flex justify-content-between mb-5">
-                        <h5 className="text-uppercase">Total price</h5>
-                        <h5>{`$${totalPrice}`}</h5>
-                      </div>
-                      <button
-                        type="button"
-                        className="btn btn-dark btn-block btn-lg"
-                        data-mdb-ripple-color="dark"
-                      >
-                        Register
-                      </button>
                     </div>
                   </div>
                 </div>

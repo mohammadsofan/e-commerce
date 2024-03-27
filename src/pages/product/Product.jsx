@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import { Bounce, toast } from "react-toastify";
+import Stars from "../products/components/Stars/Stars";
 export default function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -12,12 +13,14 @@ export default function Product() {
   const [error, setError] = useState("");
   const [cartError, setCartError] = useState(false);
   const [mainImage, setMainImage] = useState("");
+  const [rating, setRating] = useState(0);
   const getData = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/products/${id}`
       );
       if (response.data.message == "success") {
+        setRating(parseInt(response.data.avgRating));
         setProduct(response.data.product);
         setMainImage(response.data.product.mainImage.secure_url);
       }
@@ -155,7 +158,7 @@ export default function Product() {
                 <span className="fs-4">449$</span>
               </div>
               <p className="text-secondary">{product.description}</p>
-
+              <Stars num={rating} />
               <span>
                 Availability : <span className="text-success">In Stock</span>
               </span>

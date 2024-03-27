@@ -12,6 +12,9 @@ import Product from "./pages/product/Product";
 import SendCode from "./pages/sendcode/SendCode";
 import ResetPassword from "./pages/resetpassword/ResetPassword";
 import Cart from "./pages/cart/Cart";
+import Order from "./pages/order/Order";
+import Profile from "./pages/profile/Profile";
+import ProtectedRoutes from "./auth/ProtectedRoutes";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -48,7 +51,28 @@ export default function App() {
         },
         {
           path: "/cart",
-          element: <Cart />,
+          element: (
+            <ProtectedRoutes>
+              <Cart />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/order",
+          element: (
+            <ProtectedRoutes>
+              <Order />
+            </ProtectedRoutes>
+          ),
+        },
+        ,
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          ),
         },
         {
           path: "*",
