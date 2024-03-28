@@ -1,0 +1,8 @@
+.reviewComment {
+  resize: none;
+}
+@media (max-width: 991px) {
+  .reviewComment {
+    width: 100%;
+  }
+}

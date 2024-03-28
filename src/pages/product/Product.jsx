@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import { Bounce, toast } from "react-toastify";
 import Stars from "../products/components/Stars/Stars";
+import Reviews from "./components/reviews/Reviews";
 export default function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -14,6 +15,7 @@ export default function Product() {
   const [cartError, setCartError] = useState(false);
   const [mainImage, setMainImage] = useState("");
   const [rating, setRating] = useState(0);
+  const [rerender, setRerender] = useState(false);
   const getData = async () => {
     try {
       const response = await axios.get(
@@ -35,7 +37,7 @@ export default function Product() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [rerender]);
 
   const handleImageClick = (e) => {
     setMainImage(e.target.src);
@@ -63,7 +65,6 @@ export default function Product() {
       });
       setCartError("");
     } catch (error) {
-      console.log(error);
       let message =
         error.code == "ERR_NETWORK"
           ? error.message
@@ -121,7 +122,7 @@ export default function Product() {
   }
   return (
     <div className="container">
-      <div className={style.spaceTop}>
+      <section className={style.spaceTop}>
         <div className="row gy-4">
           <div className="col-lg-5">
             <div className={style.images}>
@@ -150,7 +151,7 @@ export default function Product() {
           </div>
           <div className="col-lg-7">
             <div className="info d-flex flex-column gap-3">
-              <h2 className="text-capitalize">{product.name}</h2>
+              <span className="text-capitalize fs-3">{product.name}</span>
               <div className="d-flex gap-2">
                 <span className="text-danger text-decoration-line-through fs-4">
                   500$
@@ -174,7 +175,13 @@ export default function Product() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <Reviews
+        reviews={product.reviews}
+        productId={product.id}
+        setRerender={setRerender}
+      />
     </div>
   );
 }
