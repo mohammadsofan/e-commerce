@@ -19,10 +19,11 @@ export default function Reviews({ reviews, productId, setRerender }) {
                   {review.createdAt.slice(0, 10)}
                 </span>
               </div>
+              <Stars num={parseInt(review.rating)} />
+
               <div className="d-flex flex-column">
                 <p className="comment m-0">{review.comment}</p>
               </div>
-              <Stars num={parseInt(review.rating)} />
             </div>
           </div>
         ))}
