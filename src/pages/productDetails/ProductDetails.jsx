@@ -68,9 +68,12 @@ export default function ProductDetails() {
       setCartCount((old) => old + 1);
       setCartError("");
     } catch (error) {
-      console.log(error);
-      setCartError("error occured!");
-      toast.error("error occured!", {
+      let message = "error occured!";
+      if (error.response.status == 409) {
+        message = error.response.data.message;
+      }
+      setCartError(message);
+      toast.error(message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
