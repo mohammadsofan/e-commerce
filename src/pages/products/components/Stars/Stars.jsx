@@ -9,6 +9,7 @@ export default function Stars({ num }) {
         width="18px"
         height="18px"
         viewBox="0 0 128 128"
+        key={i}
       >
         <path
           fill="#fdd835"
@@ -25,13 +26,14 @@ export default function Stars({ num }) {
       </svg>
     );
   }
-  for (let i = 1; i <= 5 - num; i++) {
+  for (let i = num + 1; i <= 5; i++) {
     stars.push(
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18px"
         height="18px"
         viewBox="0 0 128 128"
+        key={i}
       >
         <path
           fill="#b1b0af"

@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import { Bounce, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/Cart";
 
 export default function Cart() {
+  const { setCartCount } = useContext(CartContext);
   const [cart, setCart] = useState([]);
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
@@ -19,6 +21,7 @@ export default function Cart() {
       });
       if (response.status == "200") {
         setCart(response.data.products);
+        setCartCount(response.data.products.length);
       }
       setError("");
     } catch (error) {

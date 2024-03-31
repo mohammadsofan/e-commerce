@@ -11,9 +11,10 @@ export default function OrderProducts({ products }) {
       {products.map((product, i) => {
         return (
           <div
-            className={`row py-2 textSmall align-items-center ${
+            className={`row py-2 textSmall align-items-center rounded ${
               i % 2 == 0 ? "bg-light-gray" : ""
-            } rounded`}
+            }`}
+            key={product.productId._id}
           >
             <div className="col-6">
               <div className="d-flex gap-2 align-items-center">

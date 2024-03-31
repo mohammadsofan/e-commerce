@@ -73,6 +73,9 @@ export default function CreateReview({ productId, setRerender }) {
     try {
       setLoader(true);
       const token = localStorage.getItem("token");
+      if (!token) {
+        throw Error("Please login first!");
+      }
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/products/${productId}/review`,
         review,
@@ -91,7 +94,12 @@ export default function CreateReview({ productId, setRerender }) {
       });
       setRerender((old) => !old);
     } catch (error) {
-      toast.error(error.response.data.message, {
+      let message = "";
+      if (error.message == "Please login first!") {
+        message = error.message;
+      } else message = error.response.data.message;
+
+      toast.error(message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

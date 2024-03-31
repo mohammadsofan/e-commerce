@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import style from "./Product.module.css";
+import React, { useContext, useEffect, useState } from "react";
+import style from "./ProductDetails.module.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import { Bounce, toast } from "react-toastify";
 import Stars from "../products/components/Stars/Stars";
 import Reviews from "./components/reviews/Reviews";
-export default function Product() {
+import { CartContext } from "../../context/Cart";
+export default function ProductDetails() {
+  const { setCartCount } = useContext(CartContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -29,7 +31,7 @@ export default function Product() {
       setError("");
     } catch (error) {
       console.log(error);
-      setError("Page Not Found");
+      setError("Error occured");
     } finally {
       setLoader(false);
     }
@@ -63,14 +65,12 @@ export default function Product() {
         theme: "dark",
         transition: Bounce,
       });
+      setCartCount((old) => old + 1);
       setCartError("");
     } catch (error) {
-      let message =
-        error.code == "ERR_NETWORK"
-          ? error.message
-          : error.response.data.message;
-      setCartError(message);
-      toast.error(message, {
+      console.log(error);
+      setCartError("error occured!");
+      toast.error("error occured!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import { UserContext } from "../../context/User";
+import style from "./Navbar.module.css";
+import { CartContext } from "../../context/Cart";
 export default function Navbar() {
+  const { cartCount } = useContext(CartContext);
   const { userName, setUserToken, setUserName } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -112,31 +115,24 @@ export default function Navbar() {
                   Home
                 </NavLink>
               </li>
+
               <li className="nav-item">
-                <NavLink className="nav-link" to="/catergories">
-                  Catergories
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/products/categories/products/0"
-                >
+                <NavLink className="nav-link" to="/products">
                   Products
                 </NavLink>
               </li>
               {userName && (
-                <li className="nav-item">
+                <li className={`${style.carNavItem} nav-item`}>
                   <NavLink className="nav-link" to="/cart">
                     Cart
                   </NavLink>
+                  <div
+                    className={`${style.count} d-flex justify-content-center align-items-center position-absolute bg-danger text-white`}
+                  >
+                    {cartCount}
+                  </div>
                 </li>
               )}
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About
-                </NavLink>
-              </li>
             </ul>
 
             <div className={`d-flex gap-2 ms-lg-auto mt-3 mt-lg-0`}>

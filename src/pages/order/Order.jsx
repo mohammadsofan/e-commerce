@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import style from "./Order.module.css";
 import Loader from "../../components/Loader/Loader";
 import axios from "axios";
 import { orderValidation } from "./OrderValidation";
 import { Bounce, toast } from "react-toastify";
+import { CartContext } from "../../context/Cart";
 
 export default function Order() {
+  const { setCartCount } = useContext(CartContext);
   const [cart, setCart] = useState([]);
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
@@ -85,8 +87,8 @@ export default function Order() {
           theme: "dark",
           transition: Bounce,
         });
+        setCartCount(0);
         setCart([]);
-        console.log(response);
       }
       setValidate(validation);
       setError("");

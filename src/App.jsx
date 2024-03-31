@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Root from "./router/Root";
 import SignUp from "./pages/signup/SignUp";
 import Login from "./pages/login/Login";
@@ -8,13 +12,14 @@ import Products from "./pages/products/Products";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/home/Home";
 import UserContextProvider from "./context/User";
-import Product from "./pages/product/Product";
 import SendCode from "./pages/sendcode/SendCode";
 import ResetPassword from "./pages/resetpassword/ResetPassword";
 import Cart from "./pages/cart/Cart";
 import Order from "./pages/order/Order";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
+import CartContextProvider from "./context/Cart";
+import ProductDetails from "./pages/productDetails/ProductDetails";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -34,12 +39,16 @@ export default function App() {
           element: <Login />,
         },
         {
+          path: "/products",
+          element: <Products />,
+        },
+        {
           path: "/products/categories/:categoryName/:categoryId",
           element: <Products />,
         },
         {
           path: "/product/:id",
-          element: <Product />,
+          element: <ProductDetails />,
         },
         {
           path: "/sendCode",
@@ -76,7 +85,7 @@ export default function App() {
         },
         {
           path: "*",
-          element: <NotFound />,
+          element: <Navigate to={"/"} />,
         },
       ],
     },
@@ -84,7 +93,9 @@ export default function App() {
   return (
     <>
       <UserContextProvider>
-        <RouterProvider router={router} />
+        <CartContextProvider>
+          <RouterProvider router={router} />
+        </CartContextProvider>
       </UserContextProvider>
 
       <ToastContainer />
