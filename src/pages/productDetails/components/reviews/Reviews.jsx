@@ -12,12 +12,17 @@ export default function Reviews({ reviews, productId, setRerender }) {
             <div className={style.imgContainer}>
               <img src={review.createdBy.image.secure_url} alt="" />
             </div>
-            <div className="d-flex flex-column gap-1">
-              <Stars num={parseInt(review.rating)} />
-              <div className="d-flex flex-column">
+            <div className="d-flex flex-column gap-1 w-100">
+              <div className="d-flex justify-content-between flex-wrap">
                 <span className="fw-bold">{review.createdBy.userName}</span>
+                <span className={style.textSmall}>
+                  {review.createdAt.slice(0, 10)}
+                </span>
+              </div>
+              <div className="d-flex flex-column">
                 <p className="comment m-0">{review.comment}</p>
               </div>
+              <Stars num={parseInt(review.rating)} />
             </div>
           </div>
         ))}
