@@ -42,7 +42,7 @@ export default function Profile() {
     );
   }
   return (
-    <section className="mt-5 pt-5">
+    <section className="my-5 pt-5">
       <div className="container">
         <h2>PROFILE</h2>
         <div className={`d-flex flex-column gap-3 p-3 ${style.profile}`}>

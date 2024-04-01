@@ -8,7 +8,7 @@ export default function Product({ product }) {
     navigate(`/product/${id}`);
   };
   return (
-    <div className="col-sm-6 col-lg-4 col-xl-3" key={product.id}>
+    <div className="col-sm-6 col-lg-4 col-xl-3">
       <div className="d-flex justify-content-center align-items-center h-100">
         <div className="card h-100" style={{ width: "18rem" }}>
           <img

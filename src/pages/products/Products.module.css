@@ -1,3 +1,33 @@
 .products {
-  margin-top: 100px;
+  margin-top: 90px;
+}
+.productFilter {
+  width: 400px;
+  min-height: 100vh;
+  align-self: stretch;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.productFilter select {
+  border: none;
+  border-bottom: 2px solid rgba(136, 139, 136, 0.288);
+  padding: 4px;
+  outline: none;
+  background-color: transparent;
+}
+
+.productFilter input {
+  width: 60px;
+  border: 1px solid rgba(136, 139, 136, 0.288);
+  outline: none;
+}
+@media (max-width: 800px) {
+  .productFilter {
+    min-height: fit-content;
+    width: 100%;
+  }
+  .mobileView {
+    flex-direction: column;
+  }
 }

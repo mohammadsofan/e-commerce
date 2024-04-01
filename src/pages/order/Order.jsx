@@ -125,7 +125,7 @@ export default function Order() {
     );
   }
   return (
-    <section className="mt-5 pt-5 textSmall">
+    <section className="my-5 pt-5 textSmall">
       <div className="container">
         <div className="row border rounded m-1 m-md-0">
           <div className="col-12">
