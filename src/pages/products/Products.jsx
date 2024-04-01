@@ -101,8 +101,8 @@ export default function Products() {
 
   return (
     <div className={`d-flex ${style.mobileView}`}>
-      <aside className={`${style.productFilter} mt-5`}>
-        <div className="mt-4 p-3">
+      <aside className={`${style.productFilter} mt-5 `}>
+        <div className=" mt-4 p-3">
           <span className="fw-bold">Sort by : </span>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="none">none</option>
