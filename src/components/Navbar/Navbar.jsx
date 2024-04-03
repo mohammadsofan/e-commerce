@@ -4,6 +4,7 @@ import { Bounce, toast } from "react-toastify";
 import { UserContext } from "../../context/User";
 import style from "./Navbar.module.css";
 import { CartContext } from "../../context/Cart";
+import SearchBox from "./Components/SearchBox/SearchBox";
 export default function Navbar() {
   const { cartCount } = useContext(CartContext);
   const { userName, setUserToken, setUserName } = useContext(UserContext);
@@ -122,7 +123,7 @@ export default function Navbar() {
                 </NavLink>
               </li>
               {userName && (
-                <li className={`${style.carNavItem} nav-item`}>
+                <li className={`${style.cartNavItem} nav-item`}>
                   <NavLink className="nav-link" to="/cart">
                     Cart
                   </NavLink>
@@ -134,53 +135,57 @@ export default function Navbar() {
                 </li>
               )}
             </ul>
-
-            <div className={`d-flex gap-2 ms-lg-auto mt-3 mt-lg-0`}>
-              {userName == null ? (
-                <>
-                  <NavLink className="btn btn-success" to="/signup">
-                    Sign up
-                  </NavLink>
-                  <NavLink className="btn btn-outline-success" to="/login">
-                    Log in
-                  </NavLink>
-                </>
-              ) : (
-                <>
-                  <span>{userName}</span>
-                  <div
-                    className="options-menu position-relative cursor-pointer"
-                    onClick={() => setMenuOpen((prev) => !prev)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                      width={"12px"}
-                    >
-                      <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-                    </svg>
-
+            <div
+              className={`ms-lg-auto d-flex gap-4 gap-lg-5 mt-4 mt-lg-0 ${style.rightSide}`}
+            >
+              <SearchBox />
+              <div className={`d-flex gap-2 ms-lg-auto  mt-lg-0`}>
+                {userName == null ? (
+                  <>
+                    <NavLink className="btn btn-success" to="/signup">
+                      Sign up
+                    </NavLink>
+                    <NavLink className="btn btn-outline-success" to="/login">
+                      Log in
+                    </NavLink>
+                  </>
+                ) : (
+                  <>
+                    <span>{userName}</span>
                     <div
-                      className={`${
-                        menuOpen ? "d-flex" : "d-none"
-                      } flex-column position-absolute bg-white border rounded p-1`}
+                      className="options-menu position-relative cursor-pointer"
+                      onClick={() => setMenuOpen((prev) => !prev)}
                     >
-                      <Link
-                        className="text-decoration-none text-black p-1"
-                        to="/profile"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                        width={"12px"}
                       >
-                        Profile
-                      </Link>
-                      <button
-                        className="remove-border text-black p-1"
-                        onClick={handleLogout}
+                        <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                      </svg>
+
+                      <div
+                        className={`${
+                          menuOpen ? "d-flex" : "d-none"
+                        } flex-column position-absolute bg-white border rounded p-1`}
                       >
-                        Logout
-                      </button>
+                        <Link
+                          className="text-decoration-none text-black p-1"
+                          to="/profile"
+                        >
+                          Profile
+                        </Link>
+                        <button
+                          className="remove-border text-black p-1"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import style from "./Products.module.css";
 import Loader from "../../components/Loader/Loader";
 import Pagination from "./components/Pagination/Pagination";
@@ -9,6 +9,8 @@ import Product from "./components/product/Product";
 const LIMIT_PER_PAGE = 6;
 
 export default function Products() {
+  const location = useLocation();
+  const { search } = location.state || false;
   const { categoryName, categoryId } = useParams();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -57,7 +59,9 @@ export default function Products() {
         `${import.meta.env.VITE_API_URL}${
           categoryId
             ? `/products/category/${categoryId}`
-            : `/products?page=${page}&limit=${LIMIT_PER_PAGE}`
+            : !search
+            ? `/products?page=${page}&limit=${LIMIT_PER_PAGE}`
+            : `/products?search=${search}`
         }`
       );
       setProducts(response.data.products);
@@ -74,7 +78,7 @@ export default function Products() {
 
   useEffect(() => {
     getProducts();
-  }, [categoryId]);
+  }, [search]);
 
   const handlePriceChange = (e) => {
     const { name, value } = e.target;
@@ -151,11 +155,14 @@ export default function Products() {
             ))}
           </div>
           {!filteredProducts.length && !loader && !error && (
-            <div className=" d-flex justify-content-center align-items-center">
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{ height: "calc(100vh - 100px)" }}
+            >
               <span className="text-secondary fs-5">There is no products!</span>
             </div>
           )}
-          {!categoryId && (
+          {Boolean(!categoryId && filteredProducts.length && !search) && (
             <Pagination
               num={numPages}
               getProducts={getProducts}
